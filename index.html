@@ -737,12 +737,26 @@
     }
 
     function downloadCV() {
-      const link = document.createElement('a');
-      link.href = 'CV_Mike_Wilfried_TAMBA_SEE3.pdf'; 
-      link.download = 'CV_Mike_Wilfried_Tamba.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      try {
+        const filename = 'TAMBA_Mike_Wilfried_SEE 95.pdf';
+        // Encode le nom de fichier pour gérer les espaces et caractères spéciaux
+        const url = 'files/' + encodeURIComponent(filename);
+
+        const link = document.createElement('a');
+        // Chemin corrigé vers votre fichier PDF
+        link.href = 'files/TAMBA_Mike_Wilfried_SEE 95.pdf';
+        link.download = 'CV_Mike_Wilfried_Tamba.pdf';
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+      } catch (error) {
+        console.error('Erreur lors du téléchargement:', error);
+        // Fallback: ouvrir le PDF dans un nouvel onglet
+        const fallback = 'files/' + encodeURIComponent('TAMBA_Mike_Wilfried_SEE 95.pdf');
+        window.open(fallback, '_blank', 'noopener');
+      }
     }
 
     function renderEducationTimeline() {
