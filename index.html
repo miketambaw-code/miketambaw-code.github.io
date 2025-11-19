@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mike Wilfried Tamba — Portfolio</title>
+
+  <!-- Tailwind CDN (ready-to-use) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <style>
+    /* Petite customisation */
+    :root {
+      --card-bg: rgba(255,255,255,0.8);
+    }
+    .glass {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+    }
+    
+    /* Style pour la timeline de formation */
+    .timeline-item {
+      position: relative;
+      padding-left: 2rem;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #3b82f6;
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 1.5rem;
+      bottom: -1rem;
+      width: 2px;
+      background: #e2e8f0;
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    
+    /* Smooth transitions for language switch */
+    .lang-transition {
+      transition: opacity 0.3s ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 text-slate-900">
+
+  <!-- LANGUAGE SWITCHER -->
+  <div class="fixed top-4 right-4 z-50">
+    <button id="langSwitch" aria-label="Change language" class="flex items-center gap-2 px-3 py-2 rounded-md bg-white/90 shadow border border-slate-200 text-sm hover:bg-white transition-colors">
+      <i data-lucide="languages" class="w-4 h-4"></i>
+      <span id="langSwitchLabel">EN</span>
+    </button>
+  </div>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white">
+    <div class="absolute inset-0 bg-[size:50px_50px] bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)]"></div>
+    <div class="absolute top-6 right-6 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-6 left-6 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 py-16 lg:py-24">
+      <div class="flex flex-col lg:flex-row items-start gap-10">
+        <!-- Left -->
+        <div class="flex-1">
+          <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-2 mb-6">
+            <i data-lucide="sparkles" class="w-4 h-4 text-blue-400"></i>
+            <span id="availability" class="text-sm text-blue-300"></span>
+          </div>
+
+          <h1 id="heroName" class="text-4xl lg:text-6xl font-bold mb-2 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">Mike Wilfried Tamba</h1>
+          <p id="heroSubtitle" class="text-xl lg:text-2xl text-slate-300 mb-3"></p>
+
+          <p id="heroEducation" class="text-slate-400 mb-8 flex items-center gap-2">
+            <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+            <span id="heroEducationText"></span>
+          </p>
+
+          <div class="flex flex-wrap gap-3 mb-6">
+            <button id="downloadCv" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 shadow text-white cursor-pointer hover:from-blue-600 hover:to-blue-700 transition-all">
+              <i data-lucide="download" class="w-4 h-4"></i><span></span>
+            </button>
+            <a id="contactMe" href="mailto:miketambaw@gmail.com" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-600 text-white hover:bg-slate-800 transition-colors">
+              <i data-lucide="mail" class="w-4 h-4"></i><span></span>
+            </a>
+          </div>
+
+          <div class="flex gap-3">
+            <a href="https://www.linkedin.com/in/mike-wilfried-tamba/" class="p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors" target="_blank" rel="noopener">
+              <i data-lucide="linkedin" class="w-5 h-5"></i>
+            </a>
+            <a href="https://github.com/miketambaw-code" class="p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors" target="_blank" rel="noopener">
+              <i data-lucide="github" class="w-5 h-5"></i>
+            </a>
+            <a href="mailto:miketambaw@gmail.com" class="p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors">
+              <i data-lucide="mail" class="w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right profile card -->
+        <aside class="w-full lg:w-96">
+          <div class="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-2xl p-6">
+            <h3 id="profileTitle" class="text-lg font-semibold mb-4 flex items-center gap-2">
+              <i data-lucide="globe" class="w-5 h-5 text-blue-400"></i> Profil en bref
+            </h3>
+
+            <div class="space-y-3 text-sm">
+              <div class="flex items-start gap-3">
+                <i data-lucide="map-pin" class="w-4 h-4 text-slate-400 mt-0.5"></i>
+                <div>
+                  <div id="location" class="text-slate-300"></div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <i data-lucide="mail" class="w-4 h-4 text-slate-400 mt-0.5"></i>
+                <div class="text-slate-300">miketambaw@gmail.com</div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <i data-lucide="phone" class="w-4 h-4 text-slate-400 mt-0.5"></i>
+                <div class="text-slate-300">+33 6 09 76 46 95</div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <i data-lucide="calendar" class="w-4 h-4 text-slate-400 mt-0.5"></i>
+                <div id="searchText" class="text-slate-300"></div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <i data-lucide="user" class="w-4 h-4 text-slate-400 mt-0.5"></i>
+                <div id="age" class="text-slate-300"></div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-slate-700">
+              <p id="bio" class="text-sm text-slate-400"></p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <!-- FORMATION -->
+  <section class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 id="educationTitle" class="text-3xl font-bold text-slate-900 mb-4"></h2>
+        <p id="educationSubtitle" class="text-slate-600"></p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Timeline pour les formations principales -->
+        <div class="bg-slate-50 rounded-2xl p-8">
+          <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+            <i data-lucide="graduation-cap" class="w-5 h-5 text-blue-500"></i>
+            <span id="educationTimelineTitle"></span>
+          </h3>
+          
+          <div class="space-y-8" id="educationTimeline">
+            <!-- Les formations seront générées dynamiquement ici -->
+          </div>
+        </div>
+
+        <!-- Compétences techniques par domaine -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8">
+          <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+            <i data-lucide="award" class="w-5 h-5 text-blue-500"></i>
+            <span id="skillsOverviewTitle"></span>
+          </h3>
+          
+          <div class="space-y-6">
+            <!-- Programmation -->
+            <div>
+              <h4 class="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                <i data-lucide="code" class="w-4 h-4 text-blue-500"></i>
+                <span id="skillsProgramming"></span>
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">C/C++</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">Python</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">VHDL</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">SQL</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">HTML</span>
+              </div>
+            </div>
+            
+            <!-- Systèmes Embarqués -->
+            <div>
+              <h4 class="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                <i data-lucide="microchip" class="w-4 h-4 text-purple-500"></i>
+                <span id="skillsEmbedded"></span>
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs rounded-full">ESP32</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs rounded-full">Arduino</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs rounded-full">I2C</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs rounded-full">Temps réel</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs rounded-full">RFID</span>
+              </div>
+            </div>
+            
+            <!-- Électronique -->
+            <div>
+              <h4 class="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                <i data-lucide="circuit-board" class="w-4 h-4 text-green-500"></i>
+                <span id="skillsElectronics"></span>
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full">Conception</span>
+                <span class="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full">Acquisition</span>
+                <span class="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full">Instrumentation</span>
+                <span class="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full">GPS</span>
+              </div>
+            </div>
+            
+            <!-- Réseaux & IoT -->
+            <div>
+              <h4 class="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                <i data-lucide="wifi" class="w-4 h-4 text-orange-500"></i>
+                <span id="skillsNetworking"></span>
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs rounded-full">MQTT</span>
+                <span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs rounded-full">TCP/IP</span>
+                <span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs rounded-full">Protocoles industriels</span>
+                <span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs rounded-full">Node-RED</span>
+              </div>
+            </div>
+            
+            <!-- Méthodologies -->
+            <div>
+              <h4 class="font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                <i data-lucide="users" class="w-4 h-4 text-red-500"></i>
+                <span id="skillsMethodologies"></span>
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-red-100 text-red-700 text-xs rounded-full">Travail d'équipe</span>
+                <span class="px-3 py-1 bg-red-100 text-red-700 text-xs rounded-full">POO</span>
+                <span class="px-3 py-1 bg-red-100 text-red-700 text-xs rounded-full">Gestion de projet</span>
+                <span class="px-3 py-1 bg-red-100 text-red-700 text-xs rounded-full">Adaptabilité</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-8 p-4 bg-white rounded-lg border border-slate-200">
+            <div class="flex items-center gap-3">
+              <i data-lucide="target" class="w-5 h-5 text-blue-500"></i>
+              <div>
+                <p class="text-sm font-medium text-slate-800" id="educationGoal"></p>
+                <p class="text-xs text-slate-600" id="educationGoalSub"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPÉRIENCES PROFESSIONNELLES -->
+  <section class="bg-slate-50 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 id="experienceTitle" class="text-3xl font-bold text-slate-900 mb-4"></h2>
+        <p id="experienceSubtitle" class="text-slate-600"></p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-8" id="experienceTimeline">
+        <!-- Les expériences seront générées dynamiquement ici -->
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 id="projectsTitle" class="text-3xl font-bold text-slate-900 mb-4"></h2>
+        <p id="projectsSubtitle" class="text-slate-600"></p>
+      </div>
+
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+    </div>
+  </section>
+
+  <!-- COMPÉTENCES TECHNIQUES -->
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <div class="text-center mb-12">
+      <h2 id="skillsTitle" class="text-3xl font-bold text-slate-900 mb-4"></h2>
+      <p id="skillsSubtitle" class="text-slate-600"></p>
+    </div>
+
+    <!-- Skills bars -->
+    <div id="skillsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+    <!-- Skill cards (embedded, iot, scada) -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4">
+          <i data-lucide="cpu" class="w-6 h-6 text-white"></i>
+        </div>
+        <h3 id="skillEmbeddedTitle" class="font-semibold text-lg mb-2"></h3>
+        <p id="skillEmbeddedDesc" class="text-sm text-slate-600"></p>
+      </div>
+
+      <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-4">
+          <i data-lucide="wifi" class="w-6 h-6 text-white"></i>
+        </div>
+        <h3 id="skillIotTitle" class="font-semibold text-lg mb-2"></h3>
+        <p id="skillIotDesc" class="text-sm text-slate-600"></p>
+      </div>
+
+      <div class="bg-white rounded-xl p-6 shadow-sm">
+        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mb-4">
+          <i data-lucide="monitor" class="w-6 h-6 text-white"></i>
+        </div>
+        <h3 id="skillScadaTitle" class="font-semibold text-lg mb-2"></h3>
+        <p id="skillScadaDesc" class="text-sm text-slate-600"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUES ET INTÉRÊTS -->
+  <section class="bg-slate-50 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Langues -->
+        <div class="bg-white rounded-2xl p-8">
+          <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+            <i data-lucide="languages" class="w-5 h-5 text-blue-500"></i>
+            <span id="languagesTitle"></span>
+          </h3>
+          <div class="space-y-4" id="languagesList">
+            <!-- Les langues seront générées dynamiquement ici -->
+          </div>
+        </div>
+
+        <!-- Centres d'intérêt -->
+        <div class="bg-white rounded-2xl p-8">
+          <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+            <i data-lucide="heart" class="w-5 h-5 text-red-500"></i>
+            <span id="interestsTitle"></span>
+          </h3>
+          <div class="flex flex-wrap gap-3" id="interestsList">
+            <!-- Les centres d'intérêt seront générés dynamiquement ici -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 id="ctaTitle" class="text-3xl font-bold mb-4"></h2>
+      <p id="ctaSubtitle" class="text-lg mb-8 text-blue-100"></p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a id="ctaEmail" class="bg-white text-blue-600 hover:bg-slate-100 px-5 py-3 rounded-md flex items-center justify-center transition-colors" href="mailto:miketambaw@gmail.com">
+          <i data-lucide="mail" class="w-5 h-5 mr-2"></i><span></span>
+        </a>
+        <button id="ctaDownload" class="border border-white text-white hover:bg-white/10 px-5 py-3 rounded-md flex items-center justify-center cursor-pointer transition-colors">
+          <i data-lucide="download" class="w-5 h-5 mr-2"></i><span></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 py-8">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <p class="text-sm">© <span id="year"></span> Mike Wilfried Tamba • Portfolio développé avec HTML, Tailwind CSS et JavaScript</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT: data + renderer + language switch -->
+  <script>
+    // ----- DATA (FR & EN) -----
+    const DATA = {
+      fr: {
+        hero: {
+          availability: "Disponible immédiatement pour une alternance",
+          name: "Mike Wilfried Tamba",
+          subtitle: "Étudiant Ingénieur en Systèmes Électroniques Embarqués",
+          education: "ISTY, École d'ingénieurs (UVSQ) | Titulaire d'un BUT GEII",
+          location: "Ermont, Île-de-France, France",
+          searchText: "Recherche alternance - Disponible",
+          bio: "Passionné par les systèmes embarqués, l'IoT et les réseaux industriels, je recherche activement une alternance pour mettre en pratique mes compétences en C++, Python et conception de systèmes complexes.",
+          downloadCvLabel: "Télécharger CV",
+          contactLabel: "Me contacter",
+          age: "23 ans • Véhiculé"
+        },
+        educationSection: {
+          title: "Formation",
+          subtitle: "Mon parcours académique en électronique et systèmes embarqués",
+          timelineTitle: "Parcours académique",
+          skillsOverviewTitle: "Domaines de compétences",
+          goal: "Objectif : Diplôme d'ingénieur en systèmes embarqués",
+          goalSub: "Spécialisation en IoT et réseaux industriels",
+          programming: "Programmation",
+          embedded: "Systèmes Embarqués",
+          electronics: "Électronique",
+          networking: "Réseaux & IoT",
+          methodologies: "Méthodologies",
+          items: [
+            {
+              institution: "ISTY - Institut des Sciences et Techniques des Yvelines | CFAI MÉCAVENIR",
+              degree: "Diplôme d'ingénieur, Systèmes Électroniques Embarqués",
+              period: "sept. 2025 - Présent",
+              description: "Formation en cours",
+              skills: ["Systèmes embarqués", "IoT", "Réseaux industriels", "Programmation C/C++", "VHDL", "Architecture microcontrôleur", "FPGA", "Systèmes temps réel", "Supervision IHM", "Robotique", "Traitement du signal"]
+            },
+            {
+              institution: "Université Sorbonne Paris Nord",
+              degree: "BUT Génie Électrique et Informatique Industrielle (GEII)",
+              period: "sept. 2022 - août 2025",
+              description: "Diplôme Obtenu",
+              skills: ["VHDL", "Travail d'équipe", "Systèmes embarqués", "C++", "I2C", "Programmation temps réel", "POO", "SQL", "Langage C"]
+            },
+            {
+              institution: "Lycée Gustave Monod, Enghien-les-Bains",
+              degree: "Baccalauréat Sciences et Technologies de l'Industrie (STI2D)",
+              period: "sept. 2019 - juil. 2021",
+              description: "Diplôme Obtenu, spécialité SIN (Systèmes d'Information et Numérique)",
+              skills: ["Électronique", "Informatique industrielle", "Développement durable"]
+            }
+          ]
+        },
+        experienceSection: {
+          title: "Expériences Professionnelles",
+          subtitle: "Mes stages et expériences en entreprise",
+          items: [
+            {
+              company: "Eneo Cameroun",
+              position: "Stagiaire SCADA",
+              period: "Mai 2025 - Août 2025",
+              description: "Contribution à la conception d'un système de gestion de projet. Intégration au sein de l'équipe SCADA : formation sur les protocoles et procédures opérationnelles. Participation aux formations sur les raccordements électriques, les techniques de mise à la terre et les processus d'habilitation.",
+              skills: ["SCADA", "Gestion de projet", "Protocoles industriels", "Habilitation électrique"]
+            },
+            {
+              company: "RATP",
+              position: "Agent d'accueil",
+              period: "Juillet 2024 - Septembre 2024",
+              description: "Accueil, information et orientation des voyageurs en station. Gestion des flux de passagers et résolution des situations courantes en autonomie.",
+              skills: ["Communication", "Service client", "Autonomie"]
+            },
+            {
+              company: "Maxdos Mobile, Lomé - Togo",
+              position: "Stagiaire en systèmes embarqués",
+              period: "Avril 2024 - Juin 2024",
+              description: "Développement d'un tracker GPS capable de transmettre et recevoir des données. Conception de la chaîne d'acquisition et intégration des données dans une base de données pour le suivi.",
+              skills: ["Tracker GPS", "Développement embarqué", "Base de données", "C++"]
+            }
+          ]
+        },
+        skillsSection: {
+          title: "Compétences techniques",
+          subtitle: "Maîtrise des technologies clés de l'embarqué et de l'industrie",
+          skills: [
+            { name: "C / C++", level: 85 },
+            { name: "Systèmes Embarqués (ESP32, Arduino)", level: 90 },
+            { name: "Python", level: 80 },
+            { name: "Réseaux & IoT (MQTT, TCP/IP)", level: 80 },
+            { name: "VHDL", level: 70 },
+            { name: "SQL", level: 80 }
+          ],
+          embedded: {
+            title: "Électronique embarquée",
+            description: "Conception de chaînes d'acquisition et programmation bas niveau sur microcontrôleurs (ESP32, Arduino) en C/C++."
+          },
+          iot: {
+            title: "IoT & Réseaux",
+            description: "Mise en place de communications sécurisées (MQTT, TLS/SSL) et administration réseau sous Linux (Docker, pare-feu)."
+          },
+          scada: {
+            title: "SCADA & Supervision",
+            description: "Développement d'IHM, intégration de protocoles industriels (Modbus, IEC 61850) et supervision temps réel."
+          }
+        },
+        projectsSection: {
+          title: "Projets réalisés",
+          subtitle: "Portfolio de réalisations en systèmes embarqués, IoT et supervision industrielle",
+          viewProject: "Voir la simulation",
+          sourceCode: "Code source",
+          items: [
+            {
+              title: "SCADA pour Réseau de Distribution Électrique",
+              tags: ["SCADA", "Protocoles Industriels", "Cybersécurité", "IHM"],
+              description: "Conception et implémentation d'une solution SCADA pour la supervision d'un réseau électrique, incluant l'intégration de protocoles (Modbus, IEC 61850) et le développement d'une IHM synoptique.",
+              features: ["Supervision temps réel", "Intégration multi-protocoles", "Simulation interactive en ligne"],
+              source: "https://github.com/miketambaw-code/SCADA-pour-R-seau-de-Distribution-lectrique",
+              demo: "https://stageeneoscada.w3spaces.com/"
+            },
+            {
+              title: "Déploiement d'une Plateforme Collaborative",
+              tags: ["Docker", "Docker Compose", "Linux (WSL2)", "Réseau"],
+              description: "Mise en place d'une instance sécurisée d'OpenProject avec Docker. Configuration réseau avancée (pont WSL2/Windows, règles de pare-feu) et automatisation des tâches.",
+              features: ["Conteneurisation d'application", "Administration réseau et sécurité", "Automatisation de déploiement"],
+              source: "https://github.com/miketambaw-code",
+              demo: "#"
+            },
+            {
+              title: "Chaîne d'acquisition IoT avec Capteur PT100",
+              tags: ["ESP32", "C++", "MQTT", "TLS/SSL"],
+              description: "Conception d'une chaîne d'acquisition de température, du pont de Wheatstone à la transmission sécurisée des données via MQTT (TLS/SSL) sur un ESP32.",
+              features: ["Électronique de précision", "Communication IoT sécurisée", "Programmation bas niveau"],
+              source: "https://github.com/miketambaw-code",
+              demo: "#"
+            },
+            {
+              title: "Contrôle d'Accès RFID Sécurisé",
+              tags: ["ESP32", "RFID", "MQTT", "Sécurité"],
+              description: "Fabrication d'un contrôle d'accès avec lecteur RFID et ESP32, incluant une architecture réseau multi-lecteurs via MQTT et la sécurisation des données avec certificats.",
+              features: ["Contrôle d'accès physique", "Architecture réseau IoT", "Visualisation de données web"],
+              source: "https://github.com/miketambaw-code",
+              demo: "#"
+            }
+          ]
+        },
+        languagesSection: {
+          title: "Langues",
+          items: [
+            { language: "Français", level: "Langue maternelle" },
+            { language: "Anglais", level: "Bilingue" },
+            { language: "Espagnol", level: "Débutant" }
+          ]
+        },
+        interestsSection: {
+          title: "Centres d'intérêt",
+          items: ["Sport", "Musique", "Lecture", "Cinéma", "Séries"]
+        },
+        cta: {
+          title: "Travaillons ensemble !",
+          subtitle: "Disponible immédiatement pour un contrat d'alternance en Systèmes Embarqués. N'hésitez pas à me contacter pour discuter de vos projets.",
+          sendEmail: "Envoyer un e-mail",
+          downloadCv: "Télécharger mon CV"
+        }
+      },
+      en: {
+        hero: {
+          availability: "Available immediately for an apprenticeship",
+          name: "Mike Wilfried Tamba",
+          subtitle: "Embedded Electronic Systems Engineering Student",
+          education: "ISTY School of Engineering (UVSQ) | Holder of a BTech in EEIC",
+          location: "Ermont, Île-de-France, France",
+          searchText: "Seeking apprenticeship - Available now",
+          bio: "Passionate about embedded systems, IoT, and industrial networks, I am actively seeking an apprenticeship to apply my skills in C++, Python, and complex system design.",
+          downloadCvLabel: "Download Resume",
+          contactLabel: "Contact Me",
+          age: "23 years old • Driver's license & vehicle"
+        },
+        educationSection: {
+          title: "Education",
+          subtitle: "My academic journey in electronics and embedded systems",
+          timelineTitle: "Academic Path",
+          skillsOverviewTitle: "Skill Domains",
+          goal: "Objective: Master's degree in Embedded Systems Engineering",
+          goalSub: "Specializing in IoT and industrial networks",
+          programming: "Programming",
+          embedded: "Embedded Systems",
+          electronics: "Electronics",
+          networking: "Networking & IoT",
+          methodologies: "Methodologies",
+          items: [
+            {
+              institution: "ISTY - Institute of Science and Technology of Yvelines | CFAI MÉCAVENIR",
+              degree: "Master of Engineering (M.Eng.), Embedded Electronic Systems",
+              period: "Sept. 2025 - Present",
+              description: "Currently pursuing",
+              skills: ["Embedded Systems", "IoT", "Industrial Networks", "C/C++ Programming", "VHDL", "Microcontroller Architecture", "FPGA", "Real-Time Systems", "HMI Supervision", "Robotics", "Signal Processing"]
+            },
+            {
+              institution: "Sorbonne Paris Nord University",
+              degree: "University Bachelor of Technology (BUT) in Electrical Engineering & Industrial Computing (EEIC)",
+              period: "Sept. 2022 - Aug. 2025",
+              description: "Graduated",
+              skills: ["VHDL", "Teamwork", "Embedded Systems", "C++", "I2C", "Real-Time Programming", "OOP", "SQL", "C Language"]
+            },
+            {
+              institution: "Gustave Monod High School, Enghien-les-Bains",
+              degree: "French Baccalaureate in Industrial Science & Technology (STI2D)",
+              period: "Sept. 2019 - Jul. 2021",
+              description: "Graduated with a specialization in Information and Digital Systems (SIN)",
+              skills: ["Electronics", "Industrial Computing", "Sustainable Development"]
+            }
+          ]
+        },
+        experienceSection: {
+          title: "Professional Experience",
+          subtitle: "My internships and corporate experience",
+          items: [
+            {
+              company: "Eneo Cameroon",
+              position: "SCADA Intern",
+              period: "May 2025 - Aug. 2025",
+              description: "Contributed to the design of a project management system. Integrated into the SCADA team, receiving training on protocols and operational procedures. Participated in training on electrical connections, grounding techniques, and certification processes.",
+              skills: ["SCADA", "Project Management", "Industrial Protocols", "Electrical Certification"]
+            },
+            {
+              company: "RATP",
+              position: "Welcome Agent",
+              period: "July 2024 - Sept. 2024",
+              description: "Welcomed, informed, and guided travelers within the station. Managed passenger flow and independently resolved common issues.",
+              skills: ["Communication", "Customer Service", "Autonomy"]
+            },
+            {
+              company: "Maxdos Mobile, Lomé - Togo",
+              position: "Embedded Systems Intern",
+              period: "April 2024 - June 2024",
+              description: "Developed a GPS tracker capable of transmitting and receiving data. Designed the acquisition chain and integrated the data into a database for monitoring.",
+              skills: ["GPS Tracker", "Embedded Development", "Database", "C++"]
+            }
+          ]
+        },
+        skillsSection: {
+          title: "Technical Skills",
+          subtitle: "Mastery of key technologies in embedded systems and industry",
+          skills: [
+            { name: "C / C++", level: 85 },
+            { name: "Embedded Systems (ESP32, Arduino)", level: 90 },
+            { name: "Python", level: 80 },
+            { name: "Networking & IoT (MQTT, TCP/IP)", level: 80 },
+            { name: "VHDL", level: 70 },
+            { name: "SQL", level: 80 }
+          ],
+          embedded: {
+            title: "Embedded Electronics",
+            description: "Design of data acquisition chains and low-level programming on microcontrollers (ESP32, Arduino) in C/C++."
+          },
+          iot: {
+            title: "IoT & Networking",
+            description: "Implementation of secure communications (MQTT, TLS/SSL) and network administration under Linux (Docker, firewall)."
+          },
+          scada: {
+            title: "SCADA & Supervision",
+            description: "HMI development, integration of industrial protocols (Modbus, IEC 61850), and real-time supervision."
+          }
+        },
+        projectsSection: {
+          title: "Projects",
+          subtitle: "A portfolio of my work in embedded systems, IoT, and industrial supervision",
+          viewProject: "View Simulation",
+          sourceCode: "Source Code",
+          items: [
+            {
+              title: "SCADA for Electrical Distribution Network",
+              tags: ["SCADA", "Industrial Protocols", "Cybersecurity", "HMI"],
+              description: "Designed and implemented a SCADA solution to supervise an electrical network, including protocol integration (Modbus, IEC 61850) and the development of a synoptic HMI.",
+              features: ["Real-time supervision", "Multi-protocol integration", "Interactive online simulation"],
+              source: "https://github.com/miketambaw-code/SCADA-pour-R-seau-de-Distribution-lectrique",
+              demo: "https://stageeneoscada.w3spaces.com/"
+            },
+            {
+              title: "Deployment of a Collaborative Platform",
+              tags: ["Docker", "Docker Compose", "Linux (WSL2)", "Networking"],
+              description: "Set up a secure OpenProject instance using Docker. Performed advanced network configuration (WSL2/Windows bridge, firewall rules) and automated tasks.",
+              features: ["Application containerization", "Network & security administration", "Deployment automation"],
+              source: "https://github.com/miketambaw-code",
+              demo: "#"
+            },
+            {
+              title: "IoT Acquisition Chain with PT100 Sensor",
+              tags: ["ESP32", "C++", "MQTT", "TLS/SSL"],
+              description: "Designed a temperature acquisition chain, from the Wheatstone bridge to the secure transmission of data via MQTT (TLS/SSL) on an ESP32.",
+              features: ["Precision electronics", "Secure IoT communication", "Low-level programming"],
+              source: "https://github.com/miketambaw-code",
+              demo: "#"
+            },
+            {
+              title: "Secure RFID Access Control",
+              tags: ["ESP32", "RFID", "MQTT", "Security"],
+              description: "Built an access control system with an RFID reader and ESP32, featuring a multi-reader network architecture via MQTT and data security using certificates.",
+              features: ["Physical access control", "IoT network architecture", "Web data visualization"],
+              source: "https://github.com/miketambaw-code",
+              demo: "#"
+            }
+          ]
+        },
+        languagesSection: {
+          title: "Languages",
+          items: [
+            { language: "French", level: "Native" },
+            { language: "English", level: "Bilingual" },
+            { language: "Spanish", level: "Beginner" }
+          ]
+        },
+        interestsSection: {
+          title: "Interests",
+          items: ["Sports", "Music", "Reading", "Cinema", "TV Series"]
+        },
+        cta: {
+          title: "Let's Work Together!",
+          subtitle: "I am immediately available for an apprenticeship in Embedded Systems. Feel free to contact me to discuss how my skills can benefit your projects.",
+          sendEmail: "Send Email",
+          downloadCv: "Download my Resume"
+        }
+      }
+    };
+
+    // Icon names per project (lucide)
+    const PROJECT_ICONS = ["monitor", "server", "thermometer", "key-round", "radio", "car"];
+    const PROJECT_GRADIENTS = [
+      "from-blue-600 to-cyan-500",
+      "from-slate-600 to-gray-500",
+      "from-green-600 to-emerald-500",
+      "from-orange-600 to-amber-500",
+      "from-purple-600 to-pink-500",
+      "from-red-600 to-orange-500"
+    ];
+
+    // ----- RENDERING FUNCTIONS -----
+    const el = (id) => document.getElementById(id);
+    let currentLang = 'fr';
+
+    function initIcons() {
+      if (window.lucide && typeof lucide.createIcons === 'function') {
+        lucide.createIcons();
+      } else {
+        setTimeout(initIcons, 100);
+      }
+    }
+
+    function downloadCV() {
+      const link = document.createElement('a');
+      link.href = 'CV_Mike_Wilfried_TAMBA_SEE3.pdf'; 
+      link.download = 'CV_Mike_Wilfried_Tamba.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function renderEducationTimeline() {
+      const d = DATA[currentLang];
+      const educationTimeline = el('educationTimeline');
+      educationTimeline.innerHTML = '';
+
+      d.educationSection.items.forEach((education, index) => {
+        const colors = ['from-blue-500 to-blue-600', 'from-purple-500 to-purple-600', 'from-green-500 to-green-600'];
+        const icons = ['cpu', 'university', 'school'];
+        const color = colors[index % colors.length];
+        const icon = icons[index % icons.length];
+        const acquiredSkillsLabel = currentLang === 'fr' ? 'Compétences acquises :' : 'Acquired Skills:';
+
+        const educationItem = document.createElement('div');
+        educationItem.className = 'timeline-item';
+        educationItem.innerHTML = `
+          <div class="flex items-start gap-4 mb-2">
+            <div class="w-12 h-12 bg-gradient-to-r ${color} rounded-lg flex items-center justify-center flex-shrink-0">
+              <i data-lucide="${icon}" class="w-6 h-6 text-white"></i>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-bold text-slate-900">${education.institution}</h4>
+              <p class="text-slate-600">${education.degree}</p>
+              <span class="inline-block px-3 py-1 bg-${color.split('-')[1]}-100 text-${color.split('-')[1]}-700 text-xs rounded-full font-medium mt-2">
+                ${education.period}
+              </span>
+              ${education.description ? `<p class="text-sm text-slate-500 mt-1">${education.description}</p>` : ''}
+            </div>
+          </div>
+          ${education.skills && education.skills.length > 0 ? `
+            <div class="mt-4 ml-16">
+              <h5 class="font-medium text-slate-800 mb-2 text-sm">${acquiredSkillsLabel}</h5>
+              <div class="flex flex-wrap gap-2">
+                ${education.skills.map(skill => `<span class="px-3 py-1 bg-slate-200 text-slate-700 text-xs rounded-full">${skill}</span>`).join('')}
+              </div>
+            </div>
+          ` : ''}
+        `;
+        educationTimeline.appendChild(educationItem);
+      });
+    }
+
+    function renderExperienceTimeline() {
+      const d = DATA[currentLang];
+      const experienceTimeline = el('experienceTimeline');
+      experienceTimeline.innerHTML = '';
+
+      d.experienceSection.items.forEach((experience, index) => {
+        const colors = ['from-blue-500 to-blue-600', 'from-purple-500 to-purple-600', 'from-green-500 to-green-600'];
+        const color = colors[index % colors.length];
+
+        const experienceItem = document.createElement('div');
+        experienceItem.className = 'bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow';
+        experienceItem.innerHTML = `
+          <div class="flex flex-col lg:flex-row lg:items-start gap-6">
+            <div class="lg:w-1/4">
+              <div class="inline-flex px-4 py-2 bg-gradient-to-r ${color} text-white rounded-full text-sm font-medium mb-3">
+                ${experience.period}
+              </div>
+              <h3 class="font-bold text-slate-900 text-lg">${experience.company}</h3>
+              <p class="text-slate-600">${experience.position}</p>
+            </div>
+            <div class="lg:w-3/4">
+              <p class="text-slate-700 mb-4">${experience.description}</p>
+              <div class="flex flex-wrap gap-2">
+                ${experience.skills.map(skill => `<span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs rounded-full">${skill}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+
+        experienceTimeline.appendChild(experienceItem);
+      });
+    }
+    
+    function renderLanguages() {
+      const d = DATA[currentLang];
+      const languagesList = el('languagesList');
+      languagesList.innerHTML = '';
+
+      d.languagesSection.items.forEach(lang => {
+        const langItem = document.createElement('div');
+        langItem.className = 'flex justify-between items-center py-2';
+        langItem.innerHTML = `
+          <span class="font-medium text-slate-800">${lang.language}</span>
+          <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">${lang.level}</span>
+        `;
+        languagesList.appendChild(langItem);
+      });
+    }
+
+    function renderInterests() {
+      const d = DATA[currentLang];
+      const interestsList = el('interestsList');
+      interestsList.innerHTML = '';
+
+      d.interestsSection.items.forEach(interest => {
+        const interestItem = document.createElement('span');
+        interestItem.className = 'px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-sm flex items-center gap-2';
+        
+        let iconName = 'heart'; // default icon
+        const interestLower = interest.toLowerCase();
+        if (interestLower.includes('sport')) iconName = 'dumbbell';
+        else if (interestLower.includes('music')) iconName = 'music';
+        else if (interestLower.includes('read') || interestLower.includes('lecture')) iconName = 'book';
+        else if (interestLower.includes('cinema') || interestLower.includes('tv') || interestLower.includes('série')) iconName = 'tv';
+        
+        interestItem.innerHTML = `
+          <i data-lucide="${iconName}" class="w-4 h-4"></i>
+          ${interest}
+        `;
+        interestsList.appendChild(interestItem);
+      });
+    }
+
+    function renderAll() {
+      const d = DATA[currentLang];
+      document.documentElement.lang = currentLang;
+
+      // Hero
+      el('availability').textContent = d.hero.availability;
+      el('heroSubtitle').textContent = d.hero.subtitle;
+      el('heroEducationText').textContent = d.hero.education;
+      el('location').textContent = d.hero.location;
+      el('searchText').textContent = d.hero.searchText;
+      el('bio').textContent = d.hero.bio;
+      el('age').textContent = d.hero.age;
+      el('downloadCv').querySelector('span').textContent = d.hero.downloadCvLabel;
+      el('contactMe').querySelector('span').textContent = d.hero.contactLabel;
+      el('profileTitle').textContent = currentLang === 'fr' ? 'Profil en bref' : 'Profile at a glance';
+
+
+      // Education section
+      el('educationTitle').textContent = d.educationSection.title;
+      el('educationSubtitle').textContent = d.educationSection.subtitle;
+      el('educationTimelineTitle').textContent = d.educationSection.timelineTitle;
+      el('skillsOverviewTitle').textContent = d.educationSection.skillsOverviewTitle;
+      el('educationGoal').textContent = d.educationSection.goal;
+      el('educationGoalSub').textContent = d.educationSection.goalSub;
+      el('skillsProgramming').textContent = d.educationSection.programming;
+      el('skillsEmbedded').textContent = d.educationSection.embedded;
+      el('skillsElectronics').textContent = d.educationSection.electronics;
+      el('skillsNetworking').textContent = d.educationSection.networking;
+      el('skillsMethodologies').textContent = d.educationSection.methodologies;
+
+      // Experience section
+      el('experienceTitle').textContent = d.experienceSection.title;
+      el('experienceSubtitle').textContent = d.experienceSection.subtitle;
+
+      renderEducationTimeline();
+      renderExperienceTimeline();
+
+      // Languages and interests
+      el('languagesTitle').textContent = d.languagesSection.title;
+      el('interestsTitle').textContent = d.interestsSection.title;
+      renderLanguages();
+      renderInterests();
+
+      // Skills section headings
+      el('skillsTitle').textContent = d.skillsSection.title;
+      el('skillsSubtitle').textContent = d.skillsSection.subtitle;
+
+      // Render skill bars
+      const skillsGrid = el('skillsGrid');
+      skillsGrid.innerHTML = '';
+      d.skillsSection.skills.forEach(skill => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow';
+        card.innerHTML = `
+          <div class="flex justify-between items-center mb-3">
+            <span class="font-medium text-slate-800">${skill.name}</span>
+            <span class="text-sm text-slate-500">${skill.level}%</span>
+          </div>
+          <div class="w-full bg-slate-200 rounded-full h-2">
+            <div class="h-2 rounded-full transition-all duration-1000" style="width:${skill.level}%; background: linear-gradient(90deg, #3b82f6, #2563eb)"></div>
+          </div>
+        `;
+        skillsGrid.appendChild(card);
+      });
+
+      // Skill cards texts
+      el('skillEmbeddedTitle').textContent = d.skillsSection.embedded.title;
+      el('skillEmbeddedDesc').textContent = d.skillsSection.embedded.description;
+      el('skillIotTitle').textContent = d.skillsSection.iot.title;
+      el('skillIotDesc').textContent = d.skillsSection.iot.description;
+      el('skillScadaTitle').textContent = d.skillsSection.scada.title;
+      el('skillScadaDesc').textContent = d.skillsSection.scada.description;
+
+      // Projects headings
+      el('projectsTitle').textContent = d.projectsSection.title;
+      el('projectsSubtitle').textContent = d.projectsSection.subtitle;
+
+      // Render projects
+      const projectsGrid = el('projectsGrid');
+      projectsGrid.innerHTML = '';
+      d.projectsSection.items.forEach((project, idx) => {
+        const grad = PROJECT_GRADIENTS[idx % PROJECT_GRADIENTS.length];
+        const iconName = PROJECT_ICONS[idx % PROJECT_ICONS.length];
+
+        const card = document.createElement('article');
+        card.className = 'group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300';
+        card.innerHTML = `
+          <div class="absolute inset-0 bg-gradient-to-r ${grad} opacity-0 group-hover:opacity-5 transition-opacity pointer-events-none"></div>
+          <div class="p-8 flex flex-col h-full">
+            <div class="inline-flex p-3 rounded-lg bg-gradient-to-r ${grad} text-white mb-4 items-center gap-3 self-start">
+              <i data-lucide="${iconName}" class="w-6 h-6"></i>
+              <strong class="text-sm">${project.tags[0] || ''}</strong>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-900 mb-3">${project.title}</h3>
+            <p class="text-slate-600 mb-4">${project.description}</p>
+
+            <div class="flex flex-wrap gap-2 mb-6">
+              ${project.tags.map(tag => `<span class="px-3 py-1 bg-slate-100 text-slate-700 text-xs rounded-full font-medium">${tag}</span>`).join('')}
+            </div>
+
+            <div class="space-y-2 mb-6 mt-auto">
+              ${project.features.map(f => `<div class="flex items-center gap-2 text-sm text-slate-600"><i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>${f}</div>`).join('')}
+            </div>
+
+            <div class="flex gap-3">
+              <a href="${project.demo || '#'}" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gradient-to-r ${grad} text-white hover:opacity-90 transition-opacity" target="_blank" rel="noopener">${d.projectsSection.viewProject}</a>
+              <a href="${project.source || '#'}" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-200 hover:bg-slate-50 transition-colors" target="_blank" rel="noopener">${d.projectsSection.sourceCode}</a>
+            </div>
+          </div>
+        `;
+        projectsGrid.appendChild(card);
+      });
+
+      // CTA
+      el('ctaTitle').textContent = d.cta.title;
+      el('ctaSubtitle').textContent = d.cta.subtitle;
+      el('ctaEmail').querySelector('span').textContent = d.cta.sendEmail;
+      el('ctaDownload').querySelector('span').textContent = d.cta.downloadCv;
+
+      // Update lang switch label
+      el('langSwitchLabel').textContent = currentLang === 'fr' ? 'EN' : 'FR';
+      
+      setTimeout(initIcons, 10);
+    }
+    
+    function init() {
+        el('year').textContent = new Date().getFullYear();
+        renderAll();
+
+        el('langSwitch').addEventListener('click', () => {
+          currentLang = currentLang === 'fr' ? 'en' : 'fr';
+          renderAll();
+        });
+
+        el('downloadCv').addEventListener('click', downloadCV);
+        el('ctaDownload').addEventListener('click', downloadCV);
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
