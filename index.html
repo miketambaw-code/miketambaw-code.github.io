@@ -94,8 +94,11 @@
             <button id="downloadCv" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 shadow text-white cursor-pointer hover:from-blue-600 hover:to-blue-700 transition-all">
               <i data-lucide="download" class="w-4 h-4"></i><span></span>
             </button>
-            <!-- Fallback link (visible if JS disabled) -->
-            <a id="downloadCvFallback" href="files/TAMBA_Mike_Wilfried_SEE_95.pdf" download="CV_Mike_Wilfried_Tamba.pdf" class="hidden">Télécharger le CV</a>
+            <!-- Lien visible pour télécharger le CV (fallback + accessible) -->
+            <a id="downloadCvFallback" href="files/TAMBA_Mike_Wilfried_SEE_95.pdf" download="CV_Mike_Wilfried_Tamba.pdf" aria-label="Télécharger le CV" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-200 text-slate-800 hover:bg-slate-50 transition-colors">
+              <i data-lucide="download" class="w-4 h-4"></i>
+              <span></span>
+            </a>
             <a id="contactMe" href="mailto:miketambaw@gmail.com" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-600 text-white hover:bg-slate-800 transition-colors">
               <i data-lucide="mail" class="w-4 h-4"></i><span></span>
             </a>
@@ -971,6 +974,22 @@
       d.projectsSection.items.forEach((project, idx) => {
         const grad = PROJECT_GRADIENTS[idx % PROJECT_GRADIENTS.length];
         const iconName = PROJECT_ICONS[idx % PROJECT_ICONS.length];
+        // Prepare demo and source links; if they point to local `files/` we mark them for download handling
+        const demoHref = project.demo || '#';
+        const demoIsLocal = typeof demoHref === 'string' && demoHref.startsWith('files/');
+        const demoFilename = project.demoFilename || (demoIsLocal ? demoHref.split('/').pop() : 'simulation');
+
+        const sourceHref = project.source || '#';
+        const sourceIsLocal = typeof sourceHref === 'string' && sourceHref.startsWith('files/');
+        const sourceFilename = project.sourceFilename || (sourceIsLocal ? sourceHref.split('/').pop() : 'source');
+
+        const demoLinkHtml = demoIsLocal
+          ? `<a href="${demoHref}" data-filename="${demoFilename}" class="download-file inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gradient-to-r ${grad} text-white hover:opacity-90 transition-opacity">${d.projectsSection.viewProject}</a>`
+          : `<a href="${demoHref}" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gradient-to-r ${grad} text-white hover:opacity-90 transition-opacity" target="_blank" rel="noopener">${d.projectsSection.viewProject}</a>`;
+
+        const sourceLinkHtml = sourceIsLocal
+          ? `<a href="${sourceHref}" data-filename="${sourceFilename}" class="download-file inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-200 hover:bg-slate-50 transition-colors">${d.projectsSection.sourceCode}</a>`
+          : `<a href="${sourceHref}" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-200 hover:bg-slate-50 transition-colors" target="_blank" rel="noopener">${d.projectsSection.sourceCode}</a>`;
 
         const card = document.createElement('article');
         card.className = 'group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300';
@@ -994,8 +1013,8 @@
             </div>
 
             <div class="flex gap-3">
-              <a href="${project.demo || '#'}" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gradient-to-r ${grad} text-white hover:opacity-90 transition-opacity" target="_blank" rel="noopener">${d.projectsSection.viewProject}</a>
-              <a href="${project.source || '#'}" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-200 hover:bg-slate-50 transition-colors" target="_blank" rel="noopener">${d.projectsSection.sourceCode}</a>
+              ${demoLinkHtml}
+              ${sourceLinkHtml}
             </div>
           </div>
         `;
@@ -1007,12 +1026,49 @@
       el('ctaSubtitle').textContent = d.cta.subtitle;
       el('ctaEmail').querySelector('span').textContent = d.cta.sendEmail;
       el('ctaDownload').querySelector('span').textContent = d.cta.downloadCv;
+      // Visible download link label
+      const fallbackLink = el('downloadCvFallback');
+      if (fallbackLink) {
+        const span = fallbackLink.querySelector('span');
+        if (span) span.textContent = d.hero.downloadCvLabel;
+      }
 
       // Update lang switch label
       el('langSwitchLabel').textContent = currentLang === 'fr' ? 'EN' : 'FR';
       
       setTimeout(initIcons, 10);
     }
+
+    // Utility: fetch a file and force a download (works around inline content serving)
+    async function fetchAndDownload(url, filename) {
+      try {
+        const resp = await fetch(url, { cache: 'no-cache' });
+        if (!resp.ok) throw new Error('Network response was not ok');
+        const blob = await resp.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = filename || url.split('/').pop();
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(blobUrl);
+      } catch (err) {
+        console.error('fetchAndDownload failed:', err);
+        // fallback to direct navigation
+        window.open(url, '_blank', 'noopener');
+      }
+    }
+
+    // Global click handler for any download-file anchors
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest && e.target.closest('a.download-file');
+      if (!a) return;
+      e.preventDefault();
+      const url = a.href;
+      const filename = a.dataset.filename || url.split('/').pop();
+      fetchAndDownload(url, filename);
+    });
     
     function init() {
         el('year').textContent = new Date().getFullYear();
