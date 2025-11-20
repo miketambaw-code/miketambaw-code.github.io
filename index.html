@@ -94,11 +94,7 @@
             <button id="downloadCv" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 shadow text-white cursor-pointer hover:from-blue-600 hover:to-blue-700 transition-all">
               <i data-lucide="download" class="w-4 h-4"></i><span></span>
             </button>
-            <!-- Lien visible pour télécharger le CV (fallback + accessible) -->
-            <a id="downloadCvFallback" href="files/TAMBA_Mike_Wilfried_SEE_95.pdf" download="CV_Mike_Wilfried_Tamba.pdf" aria-label="Télécharger le CV" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-200 text-slate-800 hover:bg-slate-50 transition-colors">
-              <i data-lucide="download" class="w-4 h-4"></i>
-              <span></span>
-            </a>
+            <!-- removed duplicate visible CV link; JS download button remains -->
             <a id="contactMe" href="mailto:miketambaw@gmail.com" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-600 text-white hover:bg-slate-800 transition-colors">
               <i data-lucide="mail" class="w-4 h-4"></i><span></span>
             </a>
@@ -504,6 +500,16 @@
           viewProject: "Voir la simulation",
           sourceCode: "Code source",
           items: [
+              {
+                title: "Documentation Exemple",
+                tags: ["Documentation", "Exemple"],
+                description: "Fichier de documentation téléchargeable pour démonstration du mécanisme de téléchargement.",
+                features: ["Documentation", "Téléchargement direct"],
+                demo: "files/Projet_Exemple_Documentation.txt",
+                demoFilename: "Documentation_Projet_Exemple.txt",
+                source: "https://github.com/miketambaw-code",
+                sourceFilename: "Source_Link.txt"
+              },
             {
               title: "SCADA pour Réseau de Distribution Électrique",
               tags: ["SCADA", "Protocoles Industriels", "Cybersécurité", "IHM"],
@@ -640,7 +646,7 @@
             { name: "C / C++", level: 85 },
             { name: "Embedded Systems (ESP32, Arduino)", level: 90 },
             { name: "Python", level: 80 },
-            { name: "Networking & IoT (MQTT, TCP/IP)", level: 80 },
+            { name: "Networking & IoT (MQTT, TCP/IP)", level: 75 },
             { name: "VHDL", level: 70 },
             { name: "SQL", level: 80 }
           ],
@@ -663,6 +669,16 @@
           viewProject: "View Simulation",
           sourceCode: "Source Code",
           items: [
+              {
+                title: "Example Documentation",
+                tags: ["Documentation", "Example"],
+                description: "Downloadable documentation file to demonstrate the download feature.",
+                features: ["Documentation", "Direct download"],
+                demo: "files/Projet_Exemple_Documentation.txt",
+                demoFilename: "Documentation_Project_Example.txt",
+                source: "https://github.com/miketambaw-code",
+                sourceFilename: "Source_Link.txt"
+              },
             {
               title: "SCADA for Electrical Distribution Network",
               tags: ["SCADA", "Industrial Protocols", "Cybersecurity", "HMI"],
