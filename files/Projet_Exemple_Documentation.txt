@@ -1,0 +1,6 @@
+Documentation de test pour le projet Exemple.
+
+Ceci est un fichier de test placé dans le dossier `files/` pour vérifier le téléchargement via la page.
+
+Auteur: Mike Wilfried Tamba
+Date: 2025-11-20
